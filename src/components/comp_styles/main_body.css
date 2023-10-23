@@ -1,0 +1,75 @@
+.main_body {
+  height: 75%;
+  max-height: 900px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.main_body-text {
+  /* background-color: red; */
+  width: 50%;
+  padding: 4rem;
+  font-family: Montserrat;
+  color: var(--primary_blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & h1 {
+    font-family: unbounded;
+    font-weight: 900;
+    font-size: 5rem;
+    line-height: 90%;
+    color: var(--primary_green);
+  }
+
+  & .text-intro {
+    font-size: 1.2rem;
+  }
+}
+
+.title-div {
+  background: linear-gradient(
+    90deg,
+    var(--primary_blue),
+    var(--secondary_green)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.main_body-btn-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  & input {
+    padding: 1.2rem;
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+  }
+
+  #diagnosis_btn {
+    background-color: var(--primary_blue);
+  }
+
+  #hospitals_btn {
+    background-color: var(--primary_green);
+  }
+}
+
+.main_body-photo {
+  width: 50%;
+  overflow: hidden;
+  display: flex;
+  /* align-content: end; */
+
+  & img {
+    transform: scale(100%);
+  }
+}
