@@ -9,6 +9,7 @@
   font-size: 1rem;
   cursor: pointer;
   color: var(--primary_blue);
+  margin-bottom: 1rem;
 
   & h2 {
     font-size: small;

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "./comp_styles/diagnosis.css";
 import Message from "./Message";
 import BmiCalculator from "./BmiCalculator";
+import Personalization from "./Personalization";
 
 const Diagnosis = () => {
   let [chats, setChats] = useState([
@@ -31,8 +32,10 @@ const Diagnosis = () => {
       {/* SIDEBAR STARTS HERE */}
       <div className="diagnosis-sidebar">
         <BmiCalculator />
+        <Personalization />
       </div>
 
+      {/* DIAGNOSIS CONTAINER BEGINS HERE */}
       <div className="diagnosis-chat">
         {responseLoader && (
           <div className="response-loader">
@@ -101,6 +104,11 @@ async function chatAPI(chats, userText, setChats, setresponseLoader) {
   // RULE: IF THE QUESTION IS MEDICAL OR HEALTH RELATED, ABOUT SYMPTOMS, ILLNESS, DISEASE, Then provide information and suggestions to alleviate it.
   // `;
 
+  /*
+  const responseRule = length
+    ? "RULE: Keep your answer short"
+    : "RULE: Respond with more details";
+*/
   let newText = userText;
 
   const apiRequestBody = {

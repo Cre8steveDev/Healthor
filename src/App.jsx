@@ -2,13 +2,40 @@ import "./App.css";
 import "./index.css";
 import Loader from "./utilities/Loader";
 import Header from "./components/Header";
-// import Main_Body from "./components/Main_Body";
-// import Footer from "./components/Footer";
+import Main_Body from "./components/Main_Body";
+import Footer from "./components/Footer";
 import Diagnosis from "./components/Diagnosis";
 
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 const App = () => {
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Main_Body />} />
+            <Route path="diagnosis" element={<Diagnosis />} />
+            <Route
+              path="hospitals"
+              element={<div>This is the hospital component</div>}
+            />
+            <Route path="*" element={<div>Page not found!</div>} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+};
+
+export default App;
+
+{
+  /* <Diagnosis /> */
+}
+
+export const Layout = () => {
   const [UI, setUI] = useState({ loader: true, App: false });
 
   //  Timeout for Load Screen
@@ -20,19 +47,13 @@ const App = () => {
     <>
       {UI.loader && <Loader />}
 
-      {/* {Main application begins here} */}
-
       {UI.App && (
         <div className="main-app">
           <Header />
-          {/* <Main_Body />
-          <Footer /> */}
-
-          <Diagnosis />
+          <Outlet />
+          <Footer />
         </div>
       )}
     </>
   );
 };
-
-export default App;

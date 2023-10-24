@@ -1,11 +1,15 @@
 .footer-container {
   background-color: var(--primary_blue);
-  height: 20%;
+  height: 10%;
+  max-height: 1rem;
   max-height: 4.6785rem;
   font-family: Montserrat;
+  font-size: smaller;
   color: var(--white);
-  padding: 1rem;
+  padding: 0.4rem;
 
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  text-align: center;
 }

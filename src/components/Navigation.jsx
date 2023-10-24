@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
 const Nav_Link = ({ text, address }) => {
   return (
-    <a href={address}>
+    <Link to={address}>
       <li>{text}</li>
-    </a>
+    </Link>
   );
 };
 
@@ -11,6 +13,7 @@ const Navigation = ({ header }) => {
   return (
     <nav className="header-navigation">
       <ul className="navigation flex-r-c">
+        {header ? <Nav_Link text="Home" address="/" /> : ""}
         {header ? <Nav_Link text="Check Diagnosis" address="/diagnosis" /> : ""}
 
         {header ? (

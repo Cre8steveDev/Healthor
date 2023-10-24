@@ -1,6 +1,7 @@
 // Main Body Compnent that will house the
 // Home Page, sidebars and the main content
 
+import { Link } from "react-router-dom";
 import "./comp_styles/main_body.css";
 
 const Main_Body = () => {
@@ -18,9 +19,12 @@ const Main_Body = () => {
         </p>
         <br />
         <div className="main_body-btn-container">
-          <input id="diagnosis_btn" type="button" value="Check Diagnosis" />
-
-          <input id="hospitals_btn" type="button" value="Hospitals Near Me" />
+          <Link to={"/diagnosis"}>
+            <input id="diagnosis_btn" type="button" value="Check Diagnosis" />
+          </Link>
+          <Link to={"/hospitals"}>
+            <input id="hospitals_btn" type="button" value="Hospitals Near Me" />
+          </Link>
         </div>
       </div>
 
