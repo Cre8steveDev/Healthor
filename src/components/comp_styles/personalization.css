@@ -1,0 +1,19 @@
+.personalization-container {
+  font-family: Montserrat;
+  text-align: center;
+  color: var(--white);
+
+  & label {
+    margin-right: 0.8rem;
+    font-weight: 800;
+
+    & input {
+      color: white;
+    }
+  }
+}
+
+.personalization-text {
+  font-weight: 500;
+  font-size: smaller;
+}

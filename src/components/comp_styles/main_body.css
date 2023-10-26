@@ -52,6 +52,14 @@
     color: var(--white);
     border: none;
     cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    transition-delay: 0s;
+
+    &:hover {
+      transition: all 0.5s ease-in-out;
+      filter: saturate(150%);
+      transform: translateY(15%);
+    }
   }
 
   #diagnosis_btn {

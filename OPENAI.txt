@@ -2,3 +2,5 @@ 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
 
 
 git remote add origin https://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@github.com/Cr8steveDesign/Healthor.git
+
+git remote add origin https://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@github.com/Cr8steveDesign/sorting_algorithms.git

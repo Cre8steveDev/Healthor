@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import "./comp_styles/diagnosis.css";
 import Message from "./Message";
 import BmiCalculator from "./BmiCalculator";
 import Personalization from "./Personalization";
+
+import { AppContext } from "./StateProvider";
 
 const Diagnosis = () => {
   let [chats, setChats] = useState([
@@ -12,11 +14,18 @@ const Diagnosis = () => {
       message: "Hello, welcome to Healthor. How can I help you today?",
     },
   ]);
-  let [userText, setUserText] = useState("");
-  let [responseLoader, setresponseLoader] = useState(false);
+  const [userText, setUserText] = useState("");
+  const [responseLoader, setresponseLoader] = useState(false);
+  // State from Context Provider
+  const { appState } = useContext(AppContext);
 
   let key = 0;
   let updateChatUI = chats.map((chat) => <Message chat={chat} key={key++} />);
+
+  const container =
+    appState.theme == "Dark" ? { backgroundColor: "#0C134F" } : {};
+  const sidebar =
+    appState.theme == "Dark" ? { backgroundColor: "#1D267D" } : {};
 
   // Scroll to last
   const scrollingDivRef = useRef(null);
@@ -30,13 +39,13 @@ const Diagnosis = () => {
   return (
     <div className="diagnosis-container">
       {/* SIDEBAR STARTS HERE */}
-      <div className="diagnosis-sidebar">
+      <div style={sidebar} className="diagnosis-sidebar">
         <BmiCalculator />
         <Personalization />
       </div>
 
       {/* DIAGNOSIS CONTAINER BEGINS HERE */}
-      <div className="diagnosis-chat">
+      <div style={container} className="diagnosis-chat">
         {responseLoader && (
           <div className="response-loader">
             <p>Generating response...</p>
@@ -71,7 +80,13 @@ const Diagnosis = () => {
                 return [...chats, { type: "User", message: text }];
               });
               setresponseLoader(true);
-              chatAPI(chats, userText, setChats, setresponseLoader);
+              chatAPI(
+                chats,
+                userText,
+                setChats,
+                setresponseLoader,
+                appState.response_length
+              );
               setUserText("");
             }}
           />
@@ -85,11 +100,24 @@ export default Diagnosis;
 
 // API Calls to the Chat
 
-async function chatAPI(chats, userText, setChats, setresponseLoader) {
+async function chatAPI(
+  chats,
+  userText,
+  setChats,
+  setresponseLoader,
+  responseLength
+) {
+  // Get previous message to give context to AI Calls
   const previousMessages = chats.map((chat) => {
     const role = chats.type === "User" ? "assistant" : "user";
     return { role, content: chat.message };
   });
+
+  const RULE =
+    responseLength === "Short"
+      ? "RULE: ENSURE YOUR RESPONSES ARE SHORT AND SPECIFIC TO THE QUESTION OR STATEMENT THAT FOLLOWS: "
+      : "RULE: ENSURE YOUR RESPONSES ARE DETAILED AND ANSWERS THE QUESTION OR STATEMENT THAT FOLLOWS: ";
+  // State from Context Provider
 
   // let newText = `
   // CONTENT: ${userText}
@@ -109,7 +137,7 @@ async function chatAPI(chats, userText, setChats, setresponseLoader) {
     ? "RULE: Keep your answer short"
     : "RULE: Respond with more details";
 */
-  let newText = userText;
+  let newText = RULE + userText;
 
   const apiRequestBody = {
     model: "gpt-3.5-turbo",

@@ -31,10 +31,6 @@ const App = () => {
 
 export default App;
 
-{
-  /* <Diagnosis /> */
-}
-
 export const Layout = () => {
   const [UI, setUI] = useState({ loader: true, App: false });
 
