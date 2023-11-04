@@ -17,8 +17,8 @@ const Personalization = () => {
             type="radio"
             name="response-length"
             value={appState.response_length}
-            checked={appState.response_length == "Short"}
-            onClick={() =>
+            defaultChecked={appState.response_length == "Short"}
+            onChange={() =>
               setAppState((appState) => ({
                 ...appState,
                 response_length: "Short",
@@ -33,8 +33,8 @@ const Personalization = () => {
             type="radio"
             name="response-length"
             value={appState.response_length}
-            checked={appState.response_length == "Detailed"}
-            onClick={() =>
+            defaultChecked={appState.response_length == "Detailed"}
+            onChange={() =>
               setAppState((appState) => ({
                 ...appState,
                 response_length: "Detailed",
@@ -54,8 +54,8 @@ const Personalization = () => {
             type="radio"
             name="theme"
             value={appState.theme}
-            checked={appState.theme == "Light"}
-            onClick={() =>
+            defaultChecked={appState.theme == "Light"}
+            onChange={() =>
               setAppState((appState) => ({
                 ...appState,
                 theme: "Light",
@@ -70,8 +70,8 @@ const Personalization = () => {
             type="radio"
             name="theme"
             value={appState.theme}
-            checked={appState.theme == "Dark"}
-            onClick={() =>
+            defaultChecked={appState.theme == "Dark"}
+            onChange={() =>
               setAppState((appState) => ({
                 ...appState,
                 theme: "Dark",

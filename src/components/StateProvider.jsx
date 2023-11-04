@@ -9,6 +9,7 @@ const StateProvider = ({ children }) => {
   const [appState, setAppState] = useState({
     theme: "Light",
     response_length: "Detailed",
+    mobile_menu: false,
   });
 
   // Step 3: Pass down the state and functions through the context

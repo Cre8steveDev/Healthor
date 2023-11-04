@@ -20,12 +20,8 @@ const Diagnosis = () => {
   const { appState } = useContext(AppContext);
 
   let key = 0;
-  let updateChatUI = chats.map((chat) => <Message chat={chat} key={key++} />);
-
   const container =
     appState.theme == "Dark" ? { backgroundColor: "#0C134F" } : {};
-  const sidebar =
-    appState.theme == "Dark" ? { backgroundColor: "#1D267D" } : {};
 
   // Scroll to last
   const scrollingDivRef = useRef(null);
@@ -39,10 +35,7 @@ const Diagnosis = () => {
   return (
     <div className="diagnosis-container">
       {/* SIDEBAR STARTS HERE */}
-      <div style={sidebar} className="diagnosis-sidebar">
-        <BmiCalculator />
-        <Personalization />
-      </div>
+      {appState.mobile_menu ? "" : <SideBar mobile={appState.mobile_menu} />}
 
       {/* DIAGNOSIS CONTAINER BEGINS HERE */}
       <div style={container} className="diagnosis-chat">
@@ -54,7 +47,9 @@ const Diagnosis = () => {
         )}
         {/* Diagnosis Correspondence  */}
         <div className="diagnosis-chat-dialogue" ref={scrollingDivRef}>
-          {updateChatUI}
+          {chats.map((chat) => (
+            <Message chat={chat} key={key++} />
+          ))}
         </div>
 
         {/* Input field starts here */}
@@ -98,6 +93,21 @@ const Diagnosis = () => {
 
 export default Diagnosis;
 
+// SideBar Component
+export const SideBar = ({ mobile }) => {
+  const { appState } = useContext(AppContext);
+  const sidebar =
+    appState.theme == "Dark" ? { backgroundColor: "#1D267D" } : {};
+  mobile;
+
+  return (
+    <div style={sidebar} className="diagnosis-sidebar">
+      <BmiCalculator />
+      <Personalization />
+    </div>
+  );
+};
+
 // API Calls to the Chat
 
 async function chatAPI(
@@ -117,26 +127,7 @@ async function chatAPI(
     responseLength === "Short"
       ? "RULE: ENSURE YOUR RESPONSES ARE SHORT AND SPECIFIC TO THE QUESTION OR STATEMENT THAT FOLLOWS: "
       : "RULE: ENSURE YOUR RESPONSES ARE DETAILED AND ANSWERS THE QUESTION OR STATEMENT THAT FOLLOWS: ";
-  // State from Context Provider
 
-  // let newText = `
-  // CONTENT: ${userText}
-
-  // RULE: IF THE CONTENT OF THE TEXT THAT FOLLOWS THIS STATEMENT IS NOT MEDICAL OR HEALTH RELATED, SEND BACK A MESSAGE THAT YOU CAN ONLY ANSWER MEDICAL AND HEALTH RELATED QUESTIONS AS AN AI-POWERED MODEL. THEN SHARE A RANDOM HEALTH TIP USING THE FORMAT AS -
-
-  // HEALTH TIP:
-  // TIP GOES HERE
-  // FORMAT: Let there be a newline before the health tip.
-
-  // RULE:IF THE QUESTION IS MEDICAL OR HEALTH RELATED, DON'T SHARE A HEALTH TIP
-  // RULE: IF THE QUESTION IS MEDICAL OR HEALTH RELATED, ABOUT SYMPTOMS, ILLNESS, DISEASE, Then provide information and suggestions to alleviate it.
-  // `;
-
-  /*
-  const responseRule = length
-    ? "RULE: Keep your answer short"
-    : "RULE: Respond with more details";
-*/
   let newText = RULE + userText;
 
   const apiRequestBody = {

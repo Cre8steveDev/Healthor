@@ -44,3 +44,40 @@
     width: 70%;
   }
 }
+
+#menu-icon {
+  display: none;
+}
+
+/*MEDIA QUERIES*/
+
+@media screen and (max-width: 1066px) {
+  .header-navigation li {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 833px) {
+  .header-navigation {
+    display: none;
+  }
+
+  .header-logo {
+    width: 50%;
+  }
+
+  #menu-icon {
+    display: block;
+    width: 2.6rem;
+    margin-right: 1rem;
+  }
+
+  .header-logo {
+    width: 50%;
+    max-width: 270px;
+    & img {
+      width: 95%;
+      margin-left: 0.7rem;
+    }
+  }
+}

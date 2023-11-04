@@ -1,8 +1,9 @@
 .footer-container {
   background-color: var(--primary_blue);
-  height: 10%;
+  height: 5%;
   max-height: 1rem;
   max-height: 4.6785rem;
+  width: 100%;
   font-family: Montserrat;
   font-size: smaller;
   color: var(--white);
@@ -13,4 +14,13 @@
   justify-content: center;
   text-align: center;
   align-self: start;
+  /* position: absolute;
+  bottom: 0px; */
+}
+
+@media screen and (max-width: 600px) {
+  .footer-container {
+    height: max-content;
+    padding: 1rem;
+  }
 }

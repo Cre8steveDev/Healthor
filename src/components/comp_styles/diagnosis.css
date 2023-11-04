@@ -5,7 +5,8 @@
 }
 
 .diagnosis-sidebar {
-  background-color: var(--primary_green);
+  /* background-color: var(--primary_green); */
+  background-color: rgb(169, 169, 169);
   width: 30%;
   max-width: 25rem;
   padding: 2rem;
@@ -117,4 +118,28 @@
   align-items: center;
 
   z-index: 3;
+}
+
+/*Sidebar Id for possible when in mobile menu trigger*/
+
+@media screen and (max-width: 600px) {
+  .diagnosis-sidebar {
+    display: none;
+  }
+
+  .diagnosis-chat {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .user-input {
+    & input {
+      width: max-content;
+      background: var(--primary_green);
+    }
+
+    & textarea {
+      font-size: 0.9rem;
+    }
+  }
 }

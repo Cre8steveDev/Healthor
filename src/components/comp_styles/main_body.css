@@ -39,6 +39,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .main_body-btn-container {
   display: flex;
   flex-direction: row;
@@ -79,5 +80,47 @@
 
   & img {
     transform: scale(100%);
+  }
+}
+
+/*Media Query*/
+
+@media screen and (max-width: 600px) {
+  .main_body {
+    height: max-content;
+    flex-direction: column;
+  }
+
+  .main_body-text {
+    width: 100%;
+    padding: 1.5rem;
+
+    & h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    & .text-intro {
+      text-align: center;
+      font-size: 1.1rem;
+    }
+  }
+
+  .main_body-btn-container {
+    width: 100%;
+    flex-direction: column;
+
+    & input {
+      width: 100%;
+    }
+  }
+
+  .main_body-photo {
+    width: 100%;
+
+    & img {
+      width: 100%;
+    }
   }
 }
