@@ -10,14 +10,14 @@
   /* background-color: red; */
   width: 50%;
   padding: 4rem;
-  font-family: Montserrat;
+  font-family: "Montserrat";
   color: var(--primary_blue);
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   & h1 {
-    font-family: unbounded;
+    font-family: "Unbounded";
     font-weight: 900;
     font-size: 5rem;
     line-height: 90%;

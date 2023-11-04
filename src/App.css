@@ -26,7 +26,7 @@
 .mobile-navigation {
   width: 100%;
   z-index: 6;
-  font-family: Montserrat;
+  font-family: "Montserrat";
   font-size: 1.3rem;
 
   & .mob-nav {

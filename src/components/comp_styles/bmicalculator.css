@@ -5,7 +5,7 @@
   align-items: center;
   text-align: center;
   gap: 1.3rem;
-  font-family: Montserrat;
+  font-family: "Montserrat";
   font-size: 1rem;
   cursor: pointer;
   color: var(--primary_blue);
@@ -58,7 +58,7 @@
 .age-text-value,
 .weight-text-value,
 .height-text-value {
-  font-family: Unbounded;
+  font-family: "Unbounded";
   font-size: 2rem;
 }
 

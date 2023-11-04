@@ -14,7 +14,7 @@
 }
 
 .marker-name {
-  font-family: Montserrat;
+  font-family: "Montserrat";
   font-weight: 800;
   font-size: 1rem;
 }
@@ -34,7 +34,7 @@
   & input {
     padding: 0.7rem;
     border: none;
-    font-family: Montserrat;
+    font-family: "Montserrat";
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.5s ease-in-out;

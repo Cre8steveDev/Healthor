@@ -61,10 +61,8 @@ const HospitalMap = ({ apiKey }) => {
         // console.log(response);
         setNearbyHospitals(response.data.results);
       })
-      .catch(() => {
-        alert(
-          "Error Loading Map Data. Please check your internet connection. 😪"
-        );
+      .catch((err) => {
+        err;
       });
   }, [apiKey, latitude, longitude]);
 
