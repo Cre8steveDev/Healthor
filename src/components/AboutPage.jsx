@@ -11,6 +11,9 @@ const AboutPage = () => {
     appState.theme === "Dark"
       ? { backgroundColor: "var(--primary_blue)", color: "white" }
       : {};
+
+  const styletext = appState.theme === "Dark" ? { color: "white" } : {};
+
   return (
     <>
       <div style={style} className="about-container">
@@ -21,7 +24,7 @@ const AboutPage = () => {
             className="about-photo"
           />
         </div>
-        <div className="about-text">
+        <div className="about-text" style={styletext}>
           <h2 className="about-title">About Healthor.com</h2>
           <p className="about-intro">
             Welcome to Healthor.com, a transformative project fueled by the
