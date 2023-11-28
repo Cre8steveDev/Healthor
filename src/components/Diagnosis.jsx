@@ -14,8 +14,10 @@ const Diagnosis = () => {
       message: "Hello, welcome to Healthor. How can I help you today?",
     },
   ]);
+
   const [userText, setUserText] = useState("");
   const [responseLoader, setresponseLoader] = useState(false);
+
   // State from Context Provider
   const { appState } = useContext(AppContext);
 
@@ -70,10 +72,12 @@ const Diagnosis = () => {
             id="user-send"
             onClick={() => {
               // Make API Call and add response to chats
+
               setChats((chats) => {
                 let text = userText;
                 return [...chats, { type: "User", message: text }];
               });
+
               setresponseLoader(true);
               chatAPI(
                 chats,

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "./comp_styles/personalization.css";
 import { AppContext } from "./StateProvider";
 
@@ -6,6 +6,11 @@ import { AppContext } from "./StateProvider";
 
 const Personalization = () => {
   const { appState, setAppState } = useContext(AppContext);
+
+  useEffect(() => {
+    const color = appState.theme == "Dark" ? "rgb(12, 19, 79)" : "White";
+    document.body.style.backgroundColor = color;
+  }, [appState.theme]);
 
   return (
     <div className="personalization-container">
@@ -33,7 +38,7 @@ const Personalization = () => {
             type="radio"
             name="response-length"
             value={appState.response_length}
-            defaultChecked={appState.response_length == "Detailed"}
+            defaultChecked={true}
             onChange={() =>
               setAppState((appState) => ({
                 ...appState,
