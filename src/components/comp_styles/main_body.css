@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  object-fit: contain;
 
   & h1 {
     font-family: "Unbounded";
@@ -26,6 +27,7 @@
 
   & .text-intro {
     font-size: 1.2rem;
+    margin-bottom: 1.2rem;
   }
 }
 
@@ -38,6 +40,11 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+
+  & h1 {
+    font-size: 4rem;
+  }
 }
 
 .main_body-btn-container {
@@ -121,6 +128,35 @@
 
     & img {
       width: 100%;
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .main_body-text {
+    background-color: red;
+    padding: 2rem;
+    hyphens: auto;
+
+    & h1 {
+      font-size: 4rem;
+      margin-top: 1rem;
+    }
+
+    & .text-intro {
+      font-size: 1rem;
+    }
+  }
+
+  .main_body-btn-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+
+    & input {
+      font-size: 1rem;
+      padding: 0.7rem;
     }
   }
 }

@@ -1,7 +1,7 @@
 // About Page - JSX
 
 import "./comp_styles/about.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "./StateProvider";
 
 const AboutPage = () => {
@@ -12,7 +12,11 @@ const AboutPage = () => {
       ? { backgroundColor: "var(--primary_blue)", color: "white" }
       : {};
 
-  const styletext = appState.theme === "Dark" ? { color: "white" } : {};
+  const styletext = {};
+
+  useEffect(() => {
+    appState.theme === "Dark" ? { color: "white" } : {};
+  }, [appState.theme]);
 
   return (
     <>
