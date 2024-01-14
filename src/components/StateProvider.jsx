@@ -8,7 +8,7 @@ export const AppContext = createContext();
 const StateProvider = ({ children }) => {
   const [appState, setAppState] = useState({
     theme: "Light",
-    response_length: "Detailed",
+    response_length: "Short",
     mobile_menu: false,
   });
 

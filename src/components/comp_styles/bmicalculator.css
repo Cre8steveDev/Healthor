@@ -103,6 +103,6 @@
   &:hover {
     transition: all 0.5s ease-in-out;
     transition-delay: 0s;
-    background-color: var(--secondary_green);
+    background-color: #0d9d13;
   }
 }

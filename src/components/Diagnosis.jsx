@@ -101,7 +101,9 @@ export default Diagnosis;
 export const SideBar = ({ mobile }) => {
   const { appState } = useContext(AppContext);
   const sidebar =
-    appState.theme == "Dark" ? { backgroundColor: "#1D267D" } : {};
+    appState.theme == "Dark"
+      ? { background: "linear-gradient(#020e98 70%, #003200" }
+      : { background: "linear-gradient(#020e98, #0d9d13 )" };
   mobile;
 
   return (
@@ -150,8 +152,7 @@ async function chatAPI(
   let options = {
     method: "POST",
     headers: {
-      Authorization:
-        "Bearer " + "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",
+      Authorization: "Bearer " + import.meta.env.VITE_OPENAI_KEY,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(apiRequestBody),
@@ -164,12 +165,13 @@ async function chatAPI(
     );
 
     const data = await response.json();
-    const answer = data.choices[0]?.message?.content;
+    const answer = data?.choices[0]?.message?.content;
 
     if (answer) {
       setChats((chat) => [...chat, { type: "Bot", message: answer }]);
     }
   } catch (error) {
+    console.log(error.message);
     setChats((chats) => [
       ...chats,
       {

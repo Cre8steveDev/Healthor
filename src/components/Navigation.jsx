@@ -22,9 +22,7 @@ const Navigation = ({ mobile }) => {
       <ul className={listClass}>
         <Nav_Link text="Home" address="/" />
         <Nav_Link text="Check Diagnosis" address="/diagnosis" />
-
         <Nav_Link text="Hospitals Near Me" address="/hospitals" />
-
         <Nav_Link text="About the APP" address="/about" />
       </ul>
     </nav>

@@ -42,11 +42,7 @@
 
   & input {
     width: 10%;
-    background: linear-gradient(
-      90deg,
-      var(--primary_blue),
-      var(--secondary_green)
-    );
+    background: linear-gradient(90deg, var(--primary_blue), #0d9d13);
     color: white;
     font-weight: 600;
   }
@@ -77,6 +73,7 @@
   height: 3rem;
   background-size: cover;
   align-self: flex-start;
+  border-radius: 0.6rem;
 
   overflow: hidden;
 
