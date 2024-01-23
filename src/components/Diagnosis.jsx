@@ -149,16 +149,12 @@ async function chatAPI(
     ],
   };
 
+  const apiKey = import.meta.env.VITE_OPENAI_KEY;
+
   let options = {
     method: "POST",
     headers: {
-      Authorization:
-        "Bearer " +
-        "sk-zWq5Da6" +
-        "Ds6ORKkf27k" +
-        "KoT3BlbkFJ" +
-        "SedZUCoRlq" +
-        "1QBbY0oh9j",
+      Authorization: "Bearer " + apiKey,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(apiRequestBody),
@@ -186,7 +182,7 @@ async function chatAPI(
       {
         type: "Bot",
         message:
-          "Sorry, there was an error processing that request. Try again later. Thank you.",
+          "Sorry, I've exceeded my rate limit for using the OpenAI API Lol. Maybe soon Stephen would purchase some more. 😓",
       },
     ]);
   } finally {
