@@ -165,7 +165,10 @@ async function chatAPI(
     );
 
     const data = await response.json();
-    const answer = data?.choices[0]?.message?.content;
+
+    if (!data.choices) throw new Error("Error occured.");
+
+    const answer = data.choices[0].message.content;
 
     if (answer) {
       setChats((chat) => [...chat, { type: "Bot", message: answer }]);
