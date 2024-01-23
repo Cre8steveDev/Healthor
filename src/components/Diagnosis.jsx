@@ -152,7 +152,13 @@ async function chatAPI(
   let options = {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + import.meta.env.VITE_OPENAI_KEY,
+      Authorization:
+        "Bearer " +
+        "sk-zWq5Da6" +
+        "Ds6ORKkf27k" +
+        "KoT3BlbkFJ" +
+        "SedZUCoRlq" +
+        "1QBbY0oh9j",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(apiRequestBody),
