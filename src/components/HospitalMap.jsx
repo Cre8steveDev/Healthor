@@ -63,6 +63,7 @@ const HospitalMap = ({ apiKey }) => {
       })
       .catch((err) => {
         err;
+        console.log("Problem getting the hospitals");
       });
   }, [apiKey, latitude, longitude]);
 
@@ -91,6 +92,7 @@ const HospitalMap = ({ apiKey }) => {
           id="map-container"
         >
           {nearbyHospitals.map((hospital, index) => {
+            console.log(hospital);
             return (
               <Marker
                 key={index}
