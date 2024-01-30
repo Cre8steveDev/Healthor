@@ -33,15 +33,15 @@ const HospitalMap = () => {
         // res.status(200).json(response.data);
         setNearbyHospitals(response.data);
         // console.log(response.data);
-        setUserLocation({
-          lat: Number(response.data[0]?.lat),
-          lng: Number(response.data[0]?.lon),
-        });
+        // setUserLocation({
+        //   lat: Number(response.data[0]?.lat),
+        //   lng: Number(response.data[0]?.lon),
+        // });
       })
       .catch((error) => {
         // console.log(error.message);
         error;
-        alert("Sorry, an error occured!");
+        console.log("Sorry, an error occured!");
       });
   }, [latitude, longitude]);
 
@@ -64,15 +64,15 @@ const HospitalMap = () => {
         <p className="information">
           Please try to be very descriptive in the address to ensure you get
           accurate results. eg. Street, City, State, Country. You can zoom in an
-          out using the mouse scroll button, or pinch and zoom with on mobile
-          devices
+          out using + and + button on the map, or pinch and drag using two
+          fingers with on mobile devices.
         </p>
       </div>
 
       <MapContainer
         center={[userLocation.lat, userLocation.lng]}
-        zoom={16}
-        scrollWheelZoom={true}
+        zoom={15}
+        scrollWheelZoom={false}
         style={{ height: "75vh", width: "100vw" }}
         ref={mapRef}
         placeholder={
@@ -86,6 +86,8 @@ const HospitalMap = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        <UpdateMapCentre mapCentre={[userLocation.lat, userLocation.lng]} />
 
         {nearbyHospitals.map((point, idx) => (
           <Marker position={[point.lat, point.lon]} key={idx}>
@@ -129,3 +131,11 @@ const GetLocation = async (address, setUserLocation) => {
     });
   }
 };
+
+// Adjusting center of the map
+function UpdateMapCentre(props) {
+  const map = useMap();
+  // eslint-disable-next-line react/prop-types
+  map.setView(props.mapCentre, 13);
+  return null;
+}
