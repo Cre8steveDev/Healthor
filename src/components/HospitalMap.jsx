@@ -74,13 +74,15 @@ const HospitalMap = () => {
         />
         <p>
           Please try to be very descriptive in the address to ensure you get
-          accurate results. eg. Street, City, State, Country
+          accurate results. eg. Street, City, State, Country. You can zoom in an
+          out using the mouse scroll button, or pinch and zoom with on mobile
+          devices
         </p>
       </div>
 
       <MapContainer
         center={[userLocation.lat, userLocation.lng]}
-        zoom={100}
+        zoom={16}
         scrollWheelZoom={true}
         style={{ height: "75vh", width: "100vw" }}
         ref={mapRef}

@@ -13,12 +13,12 @@ import Personalization from "./components/Personalization";
 import Navigation from "./components/Navigation";
 
 import { useState, useEffect, useContext } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { HashRouter, Routes, Route, Outlet } from "react-router-dom";
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Main_Body />} />
@@ -28,7 +28,7 @@ const App = () => {
             <Route path="*" element={<div>Page not found!</div>} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 };
