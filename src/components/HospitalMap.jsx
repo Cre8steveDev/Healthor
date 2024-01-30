@@ -1,4 +1,5 @@
 import "./comp_styles/map.css";
+// eslint-disable-next-line no-unused-vars
 import { MapContainer, TileLayer, useMap, Popup, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -11,15 +12,6 @@ import "leaflet/dist/leaflet.css";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 
-//locationIQ Key
-let locationIqkey = "pk.489f5dd8c5c03f519c3b96803ae25eb7";
-
-// Map Style
-const mapContainerStyle = {
-  width: "100%",
-  height: "80%",
-};
-
 const HospitalMap = () => {
   // Compoment States
   const mapRef = useRef(null);
@@ -30,8 +22,8 @@ const HospitalMap = () => {
   const [address, setAddress] = useState("Benin City, Edo State, Nigeria");
   const [tempaddress, setTempAddress] = useState("");
   const [nearbyHospitals, setNearbyHospitals] = useState([]);
-  const [activeMarker, setActiveMarker] = useState(null);
-  const [mapCenter, setMapCenter] = useState(userLocation);
+  // const [activeMarker, setActiveMarker] = useState(null);
+  // const [mapCenter, setMapCenter] = useState(userLocation);
 
   // const { isLoaded } = useLoadScript({
   //   googleMapsApiKey: "AIzaSyAT1_U3TE0PV8OmYNopWsrm6wYQq4OvcxM",
@@ -39,17 +31,11 @@ const HospitalMap = () => {
 
   const { lat: latitude, lng: longitude } = userLocation;
 
-  const handleActiveMarker = (index) => {
-    if (index === activeMarker) return;
-    setActiveMarker(index);
-  };
-
   useEffect(() => {
     GetLocation(address, setUserLocation);
   }, [address]);
 
   // Fetch nearby hospitals using the Google Places API
-  mapCenter;
   useEffect(() => {
     axios
       .get(
@@ -86,6 +72,10 @@ const HospitalMap = () => {
           value="CHECK HOSPITALS"
           onClick={() => setAddress(tempaddress)}
         />
+        <p>
+          Please try to be very descriptive in the address to ensure you get
+          accurate results. eg. Street, City, State, Country
+        </p>
       </div>
 
       <MapContainer
