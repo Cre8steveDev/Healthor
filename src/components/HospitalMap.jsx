@@ -3,12 +3,6 @@ import "./comp_styles/map.css";
 import { MapContainer, TileLayer, useMap, Popup, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-// import {
-//   GoogleMap,
-//   InfoWindowF,
-//   Marker,
-//   useLoadScript,
-// } from "@react-google-maps/api";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 
@@ -22,12 +16,6 @@ const HospitalMap = () => {
   const [address, setAddress] = useState("Benin City, Edo State, Nigeria");
   const [tempaddress, setTempAddress] = useState("");
   const [nearbyHospitals, setNearbyHospitals] = useState([]);
-  // const [activeMarker, setActiveMarker] = useState(null);
-  // const [mapCenter, setMapCenter] = useState(userLocation);
-
-  // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: "AIzaSyAT1_U3TE0PV8OmYNopWsrm6wYQq4OvcxM",
-  // });
 
   const { lat: latitude, lng: longitude } = userLocation;
 
@@ -44,14 +32,15 @@ const HospitalMap = () => {
       .then((response) => {
         // res.status(200).json(response.data);
         setNearbyHospitals(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         setUserLocation({
           lat: Number(response.data[0]?.lat),
           lng: Number(response.data[0]?.lon),
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
+        error;
         alert("Sorry, an error occured!");
       });
   }, [latitude, longitude]);
