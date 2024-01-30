@@ -58,8 +58,12 @@ const HospitalMap = () => {
         <input
           type="button"
           id="hospital"
+          className="hospitalbtn"
           value="CHECK HOSPITALS"
-          onClick={() => setAddress(tempaddress)}
+          onClick={() => {
+            if (tempaddress.length < 3) return;
+            setAddress(tempaddress);
+          }}
         />
         <p className="information">
           Please try to be very descriptive in the address to ensure you get
@@ -136,6 +140,6 @@ const GetLocation = async (address, setUserLocation) => {
 function UpdateMapCentre(props) {
   const map = useMap();
   // eslint-disable-next-line react/prop-types
-  map.setView(props.mapCentre, 13);
+  map.setView(props.mapCentre, 14.5);
   return null;
 }
