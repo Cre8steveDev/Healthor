@@ -1,17 +1,15 @@
-/* eslint-disable react/prop-types */
-// Install the required packages
-// npm install @react-google-maps/api axios
-
 import "./comp_styles/map.css";
+import { MapContainer, TileLayer, useMap, Popup, Marker } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-import {
-  GoogleMap,
-  InfoWindowF,
-  Marker,
-  useLoadScript,
-} from "@react-google-maps/api";
+// import {
+//   GoogleMap,
+//   InfoWindowF,
+//   Marker,
+//   useLoadScript,
+// } from "@react-google-maps/api";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 //locationIQ Key
 let locationIqkey = "pk.489f5dd8c5c03f519c3b96803ae25eb7";
@@ -22,8 +20,9 @@ const mapContainerStyle = {
   height: "80%",
 };
 
-const HospitalMap = ({ apiKey }) => {
+const HospitalMap = () => {
   // Compoment States
+  const mapRef = useRef(null);
   const [userLocation, setUserLocation] = useState({
     lat: 6.332915,
     lng: 5.622178,
@@ -34,7 +33,9 @@ const HospitalMap = ({ apiKey }) => {
   const [activeMarker, setActiveMarker] = useState(null);
   const [mapCenter, setMapCenter] = useState(userLocation);
 
-  const { isLoaded } = useLoadScript({ googleMapsApiKey: apiKey });
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: "AIzaSyAT1_U3TE0PV8OmYNopWsrm6wYQq4OvcxM",
+  // });
 
   const { lat: latitude, lng: longitude } = userLocation;
 
@@ -43,32 +44,34 @@ const HospitalMap = ({ apiKey }) => {
     setActiveMarker(index);
   };
 
-  useEffect(() => GetLocation(address, setUserLocation), [address]);
+  useEffect(() => {
+    GetLocation(address, setUserLocation);
+  }, [address]);
 
   // Fetch nearby hospitals using the Google Places API
   mapCenter;
   useEffect(() => {
     axios
-      .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json", {
-        params: {
-          location: `${latitude},${longitude}`,
-          radius: 5000,
-          type: "hospital",
-          key: apiKey,
-        },
-      })
+      .get(
+        `https://us1.locationiq.com/v1/nearby?key=pk.96a5cf876667a96fdf1b9b8fa7269975&lat=${latitude}&lon=${longitude}&tag=hospital,clinic&radius=10000&format=json`
+      )
       .then((response) => {
-        // console.log(response);
-        setNearbyHospitals(response.data.results);
+        // res.status(200).json(response.data);
+        setNearbyHospitals(response.data);
+        console.log(response.data);
+        setUserLocation({
+          lat: Number(response.data[0]?.lat),
+          lng: Number(response.data[0]?.lon),
+        });
       })
-      .catch((err) => {
-        err;
-        console.log("Problem getting the hospitals");
+      .catch((error) => {
+        console.log(error.message);
+        alert("Sorry, an error occured!");
       });
-  }, [apiKey, latitude, longitude]);
+  }, [latitude, longitude]);
 
   return (
-    <>
+    <div>
       <div className="address-input-container">
         <input
           type="text"
@@ -84,76 +87,35 @@ const HospitalMap = ({ apiKey }) => {
           onClick={() => setAddress(tempaddress)}
         />
       </div>
-      {isLoaded ? (
-        <GoogleMap
-          center={userLocation}
-          zoom={17}
-          mapContainerStyle={mapContainerStyle}
-          id="map-container"
-        >
-          {nearbyHospitals.map((hospital, index) => {
-            console.log(hospital);
-            return (
-              <Marker
-                key={index}
-                id={index}
-                position={{
-                  lat: hospital.geometry.location.lat,
-                  lng: hospital.geometry.location.lng,
-                }}
-                title={hospital.name}
-                label={{ text: "H", color: "white" }}
-                cursor="pointer"
-                onClick={() => handleActiveMarker(index)}
-              >
-                {activeMarker === index ? (
-                  <InfoWindowF
-                    onCloseClick={() => {
-                      setMapCenter({
-                        lat: hospital.geometry.location.lat,
-                        lng: hospital.geometry.location.lng,
-                      });
-                      handleActiveMarker(null);
-                    }}
-                  >
-                    <div className="marker-container">
-                      {hospital.photos ? (
-                        <img
-                          src={
-                            "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" +
-                            hospital.photos[0].photo_reference +
-                            "&key=" +
-                            apiKey
-                          }
-                          alt="Hospital Photo"
-                          className="marker-photo"
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <p className="marker-name">{hospital.name}</p>
-                      <p className="marker-address">{hospital.vicinity}</p>
-                    </div>
-                  </InfoWindowF>
-                ) : null}
-              </Marker>
-            );
-          })}
-        </GoogleMap>
-      ) : (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            fontFamily: "Montserrat",
-            textAlign: "center",
-            fontSize: "1.2rem",
-          }}
-        >
-          Connecting to Maps...
-        </div>
-      )}
-    </>
+
+      <MapContainer
+        center={[userLocation.lat, userLocation.lng]}
+        zoom={100}
+        scrollWheelZoom={true}
+        style={{ height: "75vh", width: "100vw" }}
+        ref={mapRef}
+        placeholder={
+          <div className="h-[75vh] w-[screen] text-4xl">
+            {" "}
+            Currently loading map data
+          </div>
+        }
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        {nearbyHospitals.map((point, idx) => (
+          <Marker position={[point.lat, point.lon]} key={idx}>
+            <Popup>
+              <p>{point.name}</p>
+              <p>{point.display_name}</p>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 };
 
@@ -161,20 +123,27 @@ export default HospitalMap;
 
 // GET LOCATION FROM ADDRESS
 // FORWARD GEOCODING
-const GetLocation = (address, setUserLocation) => {
-  axios
-    .get("https://us1.locationiq.com/v1/search", {
-      params: {
-        key: locationIqkey,
-        q: address,
-        format: "json",
-      },
-    })
-    .then((response) => {
-      setUserLocation({
-        lat: +response.data[0]?.lat,
-        lng: +response.data[0]?.lon,
-      });
-    })
-    .catch((error) => error);
+const GetLocation = async (address, setUserLocation) => {
+  try {
+    const response = await fetch(
+      `https://us1.locationiq.com/v1/search?key=pk.96a5cf876667a96fdf1b9b8fa7269975&q=${address}&format=json`
+    );
+
+    const data = await response.json();
+
+    if (!data) {
+      throw new Error("Error Occured getting location");
+    }
+
+    setUserLocation({
+      lat: Number(data[0]?.lat),
+      lng: Number(data[0]?.lon),
+    });
+  } catch (error) {
+    console.log(error);
+    setUserLocation({
+      lat: 6.332915,
+      lng: 5.622178,
+    });
+  }
 };

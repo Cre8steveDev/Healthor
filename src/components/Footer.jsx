@@ -6,8 +6,7 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <p className="footer-text">
-        Designed and Developed by: Omoregie Stephen O. (NOU201068093) - Final
-        Year Project (B.Sc Computer Science)
+        Disu A.B, Oyelami A.O., Omoregie S.O and Afolorunsho A.A
       </p>
     </div>
   );
