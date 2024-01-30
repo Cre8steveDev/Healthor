@@ -87,7 +87,7 @@ const HospitalMap = () => {
         style={{ height: "75vh", width: "100vw" }}
         ref={mapRef}
         placeholder={
-          <div className="h-[75vh] w-[screen] text-4xl">
+          <div className="h-[73vh] w-[screen] text-4xl">
             {" "}
             Currently loading map data
           </div>
