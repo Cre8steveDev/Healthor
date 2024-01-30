@@ -72,7 +72,7 @@ const HospitalMap = () => {
           value="CHECK HOSPITALS"
           onClick={() => setAddress(tempaddress)}
         />
-        <p>
+        <p className="information">
           Please try to be very descriptive in the address to ensure you get
           accurate results. eg. Street, City, State, Country. You can zoom in an
           out using the mouse scroll button, or pinch and zoom with on mobile
@@ -101,8 +101,9 @@ const HospitalMap = () => {
         {nearbyHospitals.map((point, idx) => (
           <Marker position={[point.lat, point.lon]} key={idx}>
             <Popup>
-              <p>{point.name}</p>
+              <p className="hospital_name">{point.name}</p>
               <p>{point.display_name}</p>
+              <p>{`Latitude: ${point.lat} || Longitude: ${point.lon}`}</p>
             </Popup>
           </Marker>
         ))}
